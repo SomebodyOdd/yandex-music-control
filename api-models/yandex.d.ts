@@ -1,6 +1,10 @@
 import { ProgressInfo } from "./ProgressInfo";
 import { TrackInfo } from "./TrackInfo";
 
+declare global {
+    const externalAPI: YandexAPI;
+}
+
 interface YandexAPI {
     __eventCallbacks__: { [key: string]: ((data?: any) => void)[] | undefined };
 

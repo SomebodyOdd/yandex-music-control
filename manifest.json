@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Yandex Music Control",
-    "version": "0.1",
+    "version": "0.2",
     "description": "Allows controlling Yandex Music player with media keys by integrating it with Media Session API.",
     "content_scripts": [
         {

@@ -1,6 +1,11 @@
-import { YandexAPI } from "./api-models/yandex";
+function registerYandexEventHandler(event: string, handler: () => void) {
+    let existingEvents = externalAPI.__eventCallbacks__[event];
 
-declare const externalAPI: YandexAPI;
+    if (!existingEvents || !Array.isArray(existingEvents))
+        existingEvents = externalAPI.__eventCallbacks__[event] = [];
+
+    existingEvents.push(handler);
+}
 
 function handleProgress() {
     let current = externalAPI.getProgress();
@@ -109,9 +114,9 @@ function handleTrackChange() {
     navigator.mediaSession.metadata = new MediaMetadata(metadata);
 }
 
-externalAPI.__eventCallbacks__[externalAPI.EVENT_PROGRESS] = [handleProgress];
-externalAPI.__eventCallbacks__[externalAPI.EVENT_STATE] = [handleStateChange];
-externalAPI.__eventCallbacks__[externalAPI.EVENT_TRACK] = [handleTrackChange];
-externalAPI.__eventCallbacks__[externalAPI.EVENT_CONTROLS] = [syncControlState];
+registerYandexEventHandler(externalAPI.EVENT_PROGRESS, handleProgress);
+registerYandexEventHandler(externalAPI.EVENT_STATE, handleStateChange);
+registerYandexEventHandler(externalAPI.EVENT_TRACK, handleTrackChange);
+registerYandexEventHandler(externalAPI.EVENT_CONTROLS, syncControlState);
 
 syncControlState();
