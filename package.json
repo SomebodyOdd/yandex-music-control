@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "tsc && ncp injector.js manifest.json out/"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "ncp": "^2.0.0"
+  }
+}
